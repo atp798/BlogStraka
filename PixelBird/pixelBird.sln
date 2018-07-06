@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixelBird", "pixelBird\pixelBird.vcxproj", "{632144D8-F127-4D91-A5D3-5A094A39A8AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{632144D8-F127-4D91-A5D3-5A094A39A8AE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{632144D8-F127-4D91-A5D3-5A094A39A8AE}.Debug|Win32.Build.0 = Debug|Win32
+		{632144D8-F127-4D91-A5D3-5A094A39A8AE}.Release|Win32.ActiveCfg = Release|Win32
+		{632144D8-F127-4D91-A5D3-5A094A39A8AE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
