@@ -36,54 +36,54 @@ void moveDirect(Snake &sSnk){
 //------------ 以下初始化窗口类----------------
 int WINAPI WinMain(HINSTANCE	hInstance,HINSTANCE hPrevInst,LPSTR lpszCmdLine,int	nCmdShow)
 {
-		MSG Msg ;
-		WNDCLASS wndclass ;
-		char lpszClassName[] = "Snake";			//窗口类名
-		char lpszTitle[]= "Snake";			//窗口标题名
+	MSG Msg ;
+	WNDCLASS wndclass ;
+	char lpszClassName[] = "Snake";			//窗口类名
+	char lpszTitle[]= "Snake";			//窗口标题名
 
-        //窗口类的定义
-		wndclass.style = 0;						//窗口类型为缺省类型
-		wndclass.lpfnWndProc = WndProc ;		//窗口处理函数为WndProc
-		wndclass.cbClsExtra	= 0 ;				//窗口类无扩展
-		wndclass.cbWndExtra	= 0 ;				//窗口实例无扩展
-		wndclass.hInstance = hInstance ;		//当前实例句柄
-		wndclass.hIcon = LoadIcon( NULL, "ICON_SNAKE") ;
-												//窗口的最小化图标为缺省图标
-		wndclass.hCursor = LoadCursor( NULL,IDC_ARROW); //窗口采用箭头光标
-		wndclass.hbrBackground =(HBRUSH) GetStockObject(BLACK_BRUSH); //窗口背景为白色
-		wndclass.lpszMenuName = NULL ;			//窗口中无菜单
-		wndclass.lpszClassName = lpszClassName; 			//窗口类名为"窗口示例"
+	//窗口类的定义
+	wndclass.style = 0;						//窗口类型为缺省类型
+	wndclass.lpfnWndProc = WndProc ;		//窗口处理函数为WndProc
+	wndclass.cbClsExtra	= 0 ;				//窗口类无扩展
+	wndclass.cbWndExtra	= 0 ;				//窗口实例无扩展
+	wndclass.hInstance = hInstance ;		//当前实例句柄
+	wndclass.hIcon = LoadIcon( NULL, "ICON_SNAKE") ;
+											//窗口的最小化图标为缺省图标
+	wndclass.hCursor = LoadCursor( NULL,IDC_ARROW); //窗口采用箭头光标
+	wndclass.hbrBackground =(HBRUSH) GetStockObject(BLACK_BRUSH); //窗口背景为白色
+	wndclass.lpszMenuName = NULL ;			//窗口中无菜单
+	wndclass.lpszClassName = lpszClassName; 			//窗口类名为"窗口示例"
 
 //--------------- 以下进行窗口类的注册 -----------------
-	    if( !RegisterClass( &wndclass))			//如果注册失败则发出警告声音
-		{
-			//MessageBeep(0) ;
-			return FALSE ;
-		}
+	if( !RegisterClass( &wndclass))			//如果注册失败则发出警告声音
+	{
+		//MessageBeep(0) ;
+		return FALSE ;
+	}
 
-        //创建窗口
-		hwnd=CreateWindow(
-						lpszClassName,		//窗口类名
-						lpszTitle,				//窗口实例的标题名
-						WS_OVERLAPPEDWINDOW,	//窗口的风格
-						CW_USEDEFAULT,
-						CW_USEDEFAULT,			//窗口左上角坐标为缺省值
-						600,
-						500,			//窗口的高和宽为缺省值
-						NULL,					//此窗口无父窗口
-						NULL,					//此窗口无主菜单
-						hInstance,				//创建此窗口的应用程序的当前句柄
-						NULL) ;					//不使用该值
+	//创建窗口
+	hwnd=CreateWindow(
+			lpszClassName,		//窗口类名
+			lpszTitle,				//窗口实例的标题名
+			WS_OVERLAPPEDWINDOW,	//窗口的风格
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,			//窗口左上角坐标为缺省值
+			600,
+			500,			//窗口的高和宽为缺省值
+			NULL,					//此窗口无父窗口
+			NULL,					//此窗口无主菜单
+			hInstance,				//创建此窗口的应用程序的当前句柄
+			NULL) ;					//不使用该值
 
-		ShowWindow( hwnd, nCmdShow); 			//显示窗口
-		UpdateWindow(hwnd); 					//绘制用户区
+	ShowWindow( hwnd, nCmdShow); 			//显示窗口
+	UpdateWindow(hwnd); 					//绘制用户区
 
-		while( GetMessage(&Msg, NULL, 0, 0))	//消息循环
-		{
-			TranslateMessage( &Msg) ;
-			DispatchMessage( &Msg) ;
-		}
-		return Msg.wParam;						//消息循环结束即程序终止时将信息返回系统
+	while( GetMessage(&Msg, NULL, 0, 0))	//消息循环
+	{
+		TranslateMessage( &Msg) ;
+		DispatchMessage( &Msg) ;
+	}
+	return Msg.wParam;						//消息循环结束即程序终止时将信息返回系统
 }
 
 LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
@@ -109,59 +109,59 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_PAINT:
 			hdc=BeginPaint(hwnd,&ps);
 			hF_black=CreateFont		//创建自定义字体
-					(
-						15,				//字体的高度
-						0,				//由系统根据高宽比选取字体最佳宽度值
-						0,				//文本的倾斜度为0，表示水平
-						0,				//字体的倾斜度为0
-						FW_NORMAL,		//字体的粗度，FW_HEAVY为最粗
-						0,				//非斜体字
-						0,				//无下划线
-						0,				//无删除线
-						GB2312_CHARSET,	//表示所用的字符集为ANSI_CHARSET
-						OUT_DEFAULT_PRECIS,	//输出精度为缺省精度
-						CLIP_DEFAULT_PRECIS,	//剪裁精度为缺省精度
-						DEFAULT_QUALITY,		//输出质量为缺省值
-						DEFAULT_PITCH|FF_DONTCARE,//字间距和字体系列使用缺省值
-						"粗体字"				//字体名称
-						);
+				(
+					15,				//字体的高度
+					0,				//由系统根据高宽比选取字体最佳宽度值
+					0,				//文本的倾斜度为0，表示水平
+					0,				//字体的倾斜度为0
+					FW_NORMAL,		//字体的粗度，FW_HEAVY为最粗
+					0,				//非斜体字
+					0,				//无下划线
+					0,				//无删除线
+					GB2312_CHARSET,	//表示所用的字符集为ANSI_CHARSET
+					OUT_DEFAULT_PRECIS,	//输出精度为缺省精度
+					CLIP_DEFAULT_PRECIS,	//剪裁精度为缺省精度
+					DEFAULT_QUALITY,		//输出质量为缺省值
+					DEFAULT_PITCH|FF_DONTCARE,//字间距和字体系列使用缺省值
+					"粗体字"				//字体名称
+					);
 
-				SetTextColor(hdc,RGB(0,255,0));	//设置文本颜色为绿色
-				SetBkColor(hdc,RGB(0,0,0));
-				SelectObject(hdc,hF_black);		//将自定义字体选入设备环境
-				GetTextMetrics(hdc,&tm);		//获取字体的信息，并写入tm结构中
+			SetTextColor(hdc,RGB(0,255,0));	//设置文本颜色为绿色
+			SetBkColor(hdc,RGB(0,0,0));
+			SelectObject(hdc,hF_black);		//将自定义字体选入设备环境
+			GetTextMetrics(hdc,&tm);		//获取字体的信息，并写入tm结构中
 
-				TextOut(hdc,X,Y,lpsz_0,strlen(lpsz_0));	//使用当前字体输出文本
+			TextOut(hdc,X,Y,lpsz_0,strlen(lpsz_0));	//使用当前字体输出文本
 
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;
-				TextOut(hdc,X,Y,lpsz_1,strlen(lpsz_1));	
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;
+			TextOut(hdc,X,Y,lpsz_1,strlen(lpsz_1));	
 
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;//计算换行时下一行文本的输出坐标
-				TextOut(hdc,X,Y,lpsz_2,strlen(lpsz_2));//使用当前字体输出文本
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;//计算换行时下一行文本的输出坐标
+			TextOut(hdc,X,Y,lpsz_2,strlen(lpsz_2));//使用当前字体输出文本
 
-				//换行继续输出文本，计算新行的起始Y坐标位置
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;	
-				TextOut(hdc,X,Y,lpsz_3,strlen(lpsz_3));
+			//换行继续输出文本，计算新行的起始Y坐标位置
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;	
+			TextOut(hdc,X,Y,lpsz_3,strlen(lpsz_3));
 
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;	
- 				TextOut(hdc,X,Y,lpsz_4,strlen(lpsz_4));
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;	
+			TextOut(hdc,X,Y,lpsz_4,strlen(lpsz_4));
 
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;	
-				TextOut(hdc,X,Y,lpsz_5,strlen(lpsz_5)); 	//输出文本
-				//在该行继续输出文本
-				
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;	
- 				TextOut(hdc,X,Y,lpsz_6,strlen(lpsz_6));//以当前字体输出文本
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;	
+			TextOut(hdc,X,Y,lpsz_5,strlen(lpsz_5)); 	//输出文本
+			//在该行继续输出文本
+			
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;	
+			TextOut(hdc,X,Y,lpsz_6,strlen(lpsz_6));//以当前字体输出文本
 
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;	
- 				TextOut(hdc,X,Y,lpsz_7,strlen(lpsz_7));//以当前字体输出文本
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;	
+			TextOut(hdc,X,Y,lpsz_7,strlen(lpsz_7));//以当前字体输出文本
 
-				Y=Y+tm.tmHeight+tm.tmExternalLeading;	
- 				TextOut(hdc,X,Y,lpsz_8,strlen(lpsz_8));//以当前字体输出文本
-				
-				EndPaint(hwnd,&ps);
-				DeleteObject(hF_black);		//删除自定义字体句柄
-				break;
+			Y=Y+tm.tmHeight+tm.tmExternalLeading;	
+			TextOut(hdc,X,Y,lpsz_8,strlen(lpsz_8));//以当前字体输出文本
+			
+			EndPaint(hwnd,&ps);
+			DeleteObject(hF_black);		//删除自定义字体句柄
+			break;
         case WM_TIMER: 
 			if (wParam==ID_TIMER)
 			{
