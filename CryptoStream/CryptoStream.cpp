@@ -1,5 +1,5 @@
 //
-// Created by tianpeng.lan on 2019-02-03.
+// Created by straka on 2019-02-03.
 //
 #include <assert.h>
 #include "CryptoStream.h"
