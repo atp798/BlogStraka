@@ -7,7 +7,7 @@
 #define MIN( x, y ) ( ((x)<(y))?(x):(y) )
 
 CryptoStreamBuf::CryptoStreamBuf(std::string strPath,std::string strKey) :
-        bufSize_(MIN(256,MAX_BUFF_SIZE)), path_(strPath),aobj(1) {
+        bufSize_(MIN(256,MAX_BUFF_SIZE)), path_(strPath) {
     assert(strKey.length()==32);
 
     path_ = strPath;
