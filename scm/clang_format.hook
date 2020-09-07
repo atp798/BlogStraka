@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+readonly VERSION="7.0.0"
+
+version=$(clang-format -version)
+
+if ! [[ $version == *"$VERSION"* ]]; then
+    echo "clang-format version check failed."
+    echo "a version contains '$VERSION' is needed, but get '$version'"
+    echo "you can install the right version, and make an soft-link to '\$PATH' env"
+    exit -1
+fi
+
+# diff files on local machine.
+files=$(git diff --cached --name-status | awk '$1 != "D" {print $2}')
+for file in $files; do
+    if [[ $file =~ ^(.*cc$) || $file =~ ^(.*h$) ]] ; then
+        clang-format -i $file
+    else
+        continue;
+    fi
+done
+

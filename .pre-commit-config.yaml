@@ -1,0 +1,25 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: clang-format-with-version-check
+        name: clang-format
+        description: Format cpp code.
+        entry: bash ./scm/clang_format.hook -i
+        language: system
+        files: \.(c|cc|cxx|cpp|cu|h)$
+-   repo: local
+    hooks:
+    -   id: cpplint-cpp-source
+        name: cpplint
+        description: Check cpp code style.
+        entry: bash ./scm/cpplint.hook
+        language: system
+        files: \.(c|cc|cxx|cpp|cu|h)$
+-   repo: local
+    hooks:
+    -   id: yapf
+        name: yapf
+        description: Format python code.
+        entry: bash ./scm/yapf.hook
+        language: system
+        files: \.(py)$

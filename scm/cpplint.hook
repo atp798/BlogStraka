@@ -1,0 +1,18 @@
+#!/bin/bash
+
+TOTAL_ERRORS=0
+if [[ ! $(which cpplint) ]]; then
+    pip install cpplint
+fi
+# diff files on local machine. 
+files=$(git diff --cached --name-status | awk '$1 != "D" {print $2}')
+for file in $files; do
+    if [[ $file =~ ^(.*cc$) || $file =~ ^(.*h$) ]] ; then
+        cpplint $file;
+        TOTAL_ERRORS=$(expr $TOTAL_ERRORS + $?);
+    else
+        continue;
+    fi
+done
+
+exit $TOTAL_ERRORS

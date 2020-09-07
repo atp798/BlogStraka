@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TOTAL_ERRORS=0
+if [[ ! $(which yapf) ]]; then
+    pip install yapf==0.28.0
+fi
+# diff files on local machine. 
+files=$(git diff --cached --name-status | awk '$1 != "D" {print $2}')
+for file in $files; do
+    if [[ $file =~ ^(.*py$) ]] ; then
+       if [ "${file##*.}"x = "py"x ] && [ -f $file ]; then
+            yapf $file -i
+       fi
+    fi
+done
